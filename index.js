@@ -43,6 +43,19 @@ app.get("/characters", (req, res) => {
   });
 });
 
+app.get("/characters/search", (req, res) => {
+  const queryName = req.query.q.toLowerCase();
+
+  const foundCharacter = characters.data.find(character => {
+    return character.name.toLowerCase().includes(queryName);
+  });
+
+  res.send({
+    query: req.query,
+    data: foundCharacter
+  });
+});
+
 app.get("/characters/:id", (req, res) => {
   const character = characters.data.find(character => {
     return character.id === Number(req.params.id);
@@ -70,14 +83,6 @@ app.post("/characters", (req, res) => {
   res.send({
     newData: newCharacter,
     data: characters
-  });
-});
-
-app.get("/characters/search", (req, res) => {
-  const queryName = req.query.name.toLowerCase();
-
-  const foundCharacter = characters.data.find(character => {
-    return character.name.toLowerCase().includes(queryName);
   });
 });
 
