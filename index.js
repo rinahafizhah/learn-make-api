@@ -111,9 +111,10 @@ app.patch("/characters/update/:id", (req, res) => {
       return character;
     }
   });
-  res.send({
-    data: newCharacter
-  });
+  //   res.send({
+  //     data: newCharacter
+  //   });
+  res.json(newCharacter);
 });
 app.listen(3000, err => {
   console.log(`Server running at http://localhost:3000`);
