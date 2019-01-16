@@ -74,10 +74,10 @@ app.post("/characters", (req, res) => {
 });
 
 app.get("/characters/search", (req, res) => {
-  const queryName = req.query.name;
+  const queryName = req.query.name.toLowerCase();
 
   const foundCharacter = characters.data.find(character => {
-    return character.name.includes(queryName);
+    return character.name.toLowerCase().includes(queryName);
   });
 });
 
