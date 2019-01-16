@@ -102,6 +102,19 @@ app.delete("/characters/remove/:id", (req, res) => {
     data: deleteCharacter
   });
 });
+
+app.patch("/characters/update/:id", (req, res) => {
+  const newCharacter = characters.data.filter(character => {
+    if (character.id === Number(req.params.id)) {
+      return Object.assign(character, req.body);
+    } else {
+      return character;
+    }
+  });
+  res.send({
+    data: newCharacter
+  });
+});
 app.listen(3000, err => {
   console.log(`Server running at http://localhost:3000`);
 });
