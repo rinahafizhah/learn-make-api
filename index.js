@@ -86,6 +86,22 @@ app.post("/characters", (req, res) => {
   });
 });
 
+app.delete("/characters/remove/:id", (req, res) => {
+  const characterId = characters.data.find(character => {
+    return character.id === Number(req.params.id);
+  });
+
+  const deleteCharacter = characters.data.filter((character, index) => {
+    return character.id !== characterId.id;
+  });
+
+  characters.data = deleteCharacter;
+
+  res.send({
+    choosen: characterId,
+    data: deleteCharacter
+  });
+});
 app.listen(3000, err => {
   console.log(`Server running at http://localhost:3000`);
 });
